@@ -8,9 +8,9 @@ namespace gone {
     game_board = new board();
   }
   game::~game() {
-    delete &white_player;
-    delete &black_player;
-    delete &game_board;
+    delete white_player;
+    delete black_player;
+    delete game_board;
   }
   void game::printBoard() {
     game_board->printBoard();

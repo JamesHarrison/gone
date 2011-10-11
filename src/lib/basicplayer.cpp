@@ -5,11 +5,10 @@
 #include <stdlib.h>
 namespace gone {
   basicPlayer::basicPlayer(bool c) {
-    colour = &c;
+    colour = c;
     srand ( time(NULL) );
   }
   basicPlayer::~basicPlayer() {
-    delete &colour;
   }
   bool basicPlayer::makeMove(board *b) {
     // For now: Place randomly on board
