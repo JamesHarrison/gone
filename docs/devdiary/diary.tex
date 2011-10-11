@@ -1,0 +1,20 @@
+\documentclass[a4paper,12pt]{article}
+\begin{document}
+
+\section*{Project Start - 30th September 2011}
+
+Having spent a considerable amount of time doing some basic research and learning how to play Go (in theory, at least) I have begun work on a basic C++ framework for programmatically playing the game. I've started off by creating data structures for storing board states in the most efficient manner possible by using bitsets. I'm also being overly paranoid about memory allocation and deallocation so as to ensure that my boards are as efficient as possible. Next I will work on manipulation and query functions for boards - identifying if an intersection is free, identifying liberties of a given stone, and placing stones.
+
+The tricky bit is going to be in illegal move identification. Being able to rapidly say ''Okay, here's all the valid moves'' will be important, but ko move identification will be tricky- storing past states is inefficient and won't work in any case so I need a more efficient way to identify violations of the ko rule. Seems like a good place to start. Of course, ko violation implies a degree of game state awareness which I've touched on but not really progressed much onto. The game class will be a tricky one, since it will be essentially hold a tree of boards in itself.
+
+I'm also going to abstract my solver code into a library. This should keep everything nice and clear and structured, and will permit reuse of code where needed (for example, implementing a solver in a higher level language using C++ datastructs).
+
+I have tentatively named my project 'gone', for lack of any better name coming to my mind for now.
+
+Pretty standard build environment being used - CMake+make for builds, git for SCM and versioning.
+
+\section*{31st September-1st October}
+
+Cracking on with basic board manipulation functions like adding stones as well as writing tests.
+
+\end{document}
