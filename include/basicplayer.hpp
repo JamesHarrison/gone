@@ -2,7 +2,7 @@
 #define BASICPLAYER_HPP
 namespace gone {
   class basicPlayer {
-    bool colour;
+    bool* colour;
     public:
       basicPlayer(bool c);
       ~basicPlayer();
