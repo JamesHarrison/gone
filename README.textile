@@ -1,0 +1,14 @@
+h1. Gone
+
+Gone is a computational solver project for the Go board game. It is implemented in C++.
+
+h2. Building and requirements
+
+Gone requires the Google Performance tools library (tcmalloc and the profiler), cmake and g++.
+
+To build:
+
+<pre>mkdir build
+cd build
+cmake ../
+make</pre>
