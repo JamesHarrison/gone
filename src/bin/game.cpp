@@ -1,4 +1,3 @@
-#include "board.hpp"
 #include "game.hpp"
 using namespace gone;
 #include <google/profiler.h>

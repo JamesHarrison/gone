@@ -17,4 +17,17 @@ Pretty standard build environment being used - CMake+make for builds, git for SC
 
 Cracking on with basic board manipulation functions like adding stones as well as writing tests.
 
+
+\section*{8th-12th October}
+
+Finally got the basic stuff sorted to the extent that I now have a program that can play against itself. No rules are yet implemented other than single occupancy of cells, and the players literally play a stone at random each turn.
+
+I've added a dependency- the Google Perftools project is being used for memory usage profiling and CPU usage profiling. In addition the tcmalloc library, also part of the Perftools project, is a nice little performance booster, and speeds up memory allocation. I've been going over my basic code with a fine comb and picking up on any memory leaks or performance gains. Premature optimization may be the death of a project but in a project like this, where performance of the core is going to have a huge impact on the rest, it's worth a little bit of time. Everything is watertight now and there are no leaks anywhere, floating pointers or other nasties. So far, so good.
+
+Next steps are, I think, to start on a more sophisticated Go player. Pitting the computer against itself is working fine for now, and I don't see a reason to change that for a little while. Clearly there'll be a need to make some form of interface to let humans play against it at some point but while I'm still in the early stages of getting things working and examining techniques (not to mention learning the game- I bought a Go set yesterday and am reading a small library of eBooks on the topic), there's really no point. 
+
+I'm considering how complex it would be to take a neural network and train it via stored human vs human Go games; this would probably yield a passably decent player, particularly using a cascade trainer. I may give this a shot and see how I go; building/implementing a SGF parser (usual storage for Go games) would be useful in either case.
+
+I've also sorted out documentation for the project using Doxygen and am now working through the existing code to make sure everything is well-documented.
+
 \end{document}

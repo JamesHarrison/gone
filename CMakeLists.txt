@@ -12,6 +12,9 @@ set (CMAKE_CXX_FLAGS "-Wall")
 ## Packages
 find_package (Perftools REQUIRED)
 
+# Documentation
+add_subdirectory(docs)
+
 ## Includes and libraries
 include_directories ("include")
 include_directories (${GOOGLE_PERFTOOLS_INCLUDE_DIR})

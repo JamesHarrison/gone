@@ -2,7 +2,7 @@ h1. Gone
 
 Gone is a computational solver project for the Go board game. It is implemented in C++.
 
-h2. Building and requirements
+h2. Building and Requirements
 
 Gone requires the Google Performance tools library (tcmalloc and the profiler), cmake and g++.
 
@@ -12,3 +12,30 @@ To build:
 cd build
 cmake ../
 make</pre>
+
+h2. Documentation
+
+To build documentation, you must have Doxygen installed. It is also recommended to have pdflatex and graphviz available, though these are not required.
+
+To make HTML documentation and LaTeX source files, run:
+
+<pre>make doc</pre>
+
+in the build directory. This will produce documentation in the build/docs subfolder.
+
+To make PDFs of LaTeX output:
+
+<pre>cd docs/latex
+make</pre>
+
+h2. Licensing
+
+Gone is licensed under the GNU General Public License version 3 or greater.
+
+Copyright (C) 2011 James Harrison.
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/
