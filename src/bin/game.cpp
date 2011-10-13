@@ -4,7 +4,7 @@ using namespace gone;
 int main() {
   ProfilerStart("/tmp/gone_game.prof");
   game *g = new game;
-  bool result = g->run();
+  g->run();
   g->printBoard();
   delete g;
   ProfilerStop();
