@@ -9,6 +9,9 @@ set ( CMAKE_BUILD_TYPE Debug )
 # Warn about everything. Beautiful code doesn't warn.
 set (CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} "-Wl,-lprofiler")
 set (CMAKE_CXX_FLAGS "-Wall")
+
+include (OptimizeForArchitecture)
+OptimizeForArchitecture()
 ## Packages
 find_package (Perftools REQUIRED)
 
