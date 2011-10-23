@@ -4,7 +4,7 @@ using namespace gone;
 #include <google/profiler.h>
 int main() {
   ProfilerStart("/tmp/gone_test.prof");
-  for (int i=0;i<1000000;i++) {
+  for (int i=0;i<1000;i++) {
     game *g = new game();
     g->run();
     delete g;

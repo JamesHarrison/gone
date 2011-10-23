@@ -15,8 +15,17 @@ OptimizeForArchitecture()
 ## Packages
 find_package (Perftools REQUIRED)
 
-# Documentation
+# Documentation - make doc
 add_subdirectory(docs)
+
+# Tests - make test
+ENABLE_TESTING()
+add_test(TestGoneTest gone_test)
+add_test(TestGoneGame gone_game)
+add_test(TestGoneSgfTest gone_sgf_test)
+
+# Packaging
+INCLUDE(CPack)
 
 ## Includes and libraries
 include_directories ("include")
