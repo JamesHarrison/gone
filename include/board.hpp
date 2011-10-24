@@ -28,13 +28,16 @@ namespace gone {
     /**
     Adds a stone to the board at a given position for a given owner, optionally checking for illegal moves.
 
-    @param x The x-coordinate to place a stone at (indexed from 0)
-    @param y The y-coordinate to place a stone at (indexed from 0)
+    @param pos The position on the board to add at
     @param o The owner (white=true, black=false)
-    @param check_for_illegal_moves Enables or disables illegal move checking
-    @return True if the move was performed, false otherwise
     */
-    bool addStone(int x, int y, bool o, bool check_for_illegal_moves);
+    void addStone(unsigned char pos, bool o);
+    /**
+    @param pos Position on the board to check
+    @param owner Owner to check for
+    @return True if a stone can be placed in this position
+    */
+    bool canAdd(unsigned char pos, bool owner);
   };
 }
 #endif

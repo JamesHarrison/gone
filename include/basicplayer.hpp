@@ -4,6 +4,7 @@
 */
 #ifndef BASICPLAYER_HPP
 #define BASICPLAYER_HPP
+#include "move.hpp"
 namespace gone {
   /// The basicPlayer class represents a Go solver.
   class basicPlayer {
@@ -18,9 +19,10 @@ namespace gone {
       /**
       Have the player make a move on the given board.
       @param b A pointer to the board to be used.
-      @returns True if the move was successful, false if it could not be made.
+      @param last_move A pointer to the last move made, used to construct the new move
+      @returns A pointer to the move the player wants to make, or NULL.
       */
-      bool makeMove(board *b);
+      move *makeMove(board *b, move *last_move);
   };
 }
 #endif

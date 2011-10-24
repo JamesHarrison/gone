@@ -32,18 +32,15 @@ namespace gone {
   * Adds a stone at the specified position (x/y coordinate) with the given owner (false=black, true=white)
   * FIXME: Don't allow illegal stone placement?
   */
-  bool board::addStone(int x, int y, bool o, bool check_for_illegal_moves) {
-    size_t pos = (y*9)+x;
-    //std::cout << "Position: " << pos << " x: " << x << " y: " << y << " owner: " << o << endl;
-    if (check_for_illegal_moves) {
-      if ((*occupied).test(pos) == true) {
-        //std::cout << "Illegal move" << endl;
-        return false;
-      }
-    }
-    //std::cout << "Legal move" << endl;
+  void board::addStone(unsigned char pos, bool o) {
     (*occupied).set(pos, true);
     (*owner).set(pos, o);
+  }
+  // FIXME: Improve this.
+  bool board::canAdd(unsigned char pos, bool owner) {
+    if ((*occupied).test(pos) == true) {
+      return false;
+    }
     return true;
   }
 }

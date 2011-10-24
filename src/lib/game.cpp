@@ -17,19 +17,25 @@ namespace gone {
   }
   bool game::run() {
     // Black plays first
-    bool current_player = false;
-    bool last_move_success = true;
-    while(last_move_success) {
-      //std::cout << "Starting run, white is " << white_player << " black " << black_player << endl;
+    move *current_move = NULL;
+    current_move = black_player->makeMove(game_board, current_move);
+    bool current_player = true;
+    // Now we keep on looping till we hit a NULL.
+    while(current_move != NULL) {
+      // Add the last player's move.
+      game_board->addStone(current_move->getPosition(), !current_player);
+      // Print the last move.
+      current_move->printMove();
+      // Make the next move.
       if (current_player == true) {
-        last_move_success = white_player->makeMove(game_board);
-        //std::cout << "White made a move: " << last_move_success << endl;
+        current_move = white_player->makeMove(game_board, current_move);
       } else {
-        last_move_success = black_player->makeMove(game_board);
-        //std::cout << "Black made a move: " << last_move_success << endl;
+        current_move = black_player->makeMove(game_board, current_move);
       }
+      // Mark this player as having made their move.
       current_player = !current_player;
     }
+    delete current_move;
     return true;
   }
 
