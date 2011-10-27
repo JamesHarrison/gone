@@ -47,3 +47,6 @@ target_link_libraries (gone_game ${Perftools_TCMALLOC_LIBRARY} ${Perftools_PROFI
 
 add_executable (gone_sgf_test src/bin/sgf_test.cpp)
 target_link_libraries (gone_sgf_test ${Perftools_TCMALLOC_LIBRARY} ${Perftools_PROFILER_LIBRARY} sgf game board basicplayer move)
+
+add_executable (gone_gtp src/bin/gtp.cpp)
+target_link_libraries (gone_gtp ${Perftools_TCMALLOC_LIBRARY} ${Perftools_PROFILER_LIBRARY} sgf game board basicplayer move)
