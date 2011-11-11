@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.6)
 ## Project setup
 project (Gone)
 set (Gone_VERSION_MAJOR 0)
-set (Gone_VERSION_MINOR 1)
+set (Gone_VERSION_MINOR 2)
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
 set ( CMAKE_VERBOSE_MAKEFILE OFF )
 set ( CMAKE_BUILD_TYPE Debug )
@@ -14,6 +14,7 @@ include (OptimizeForArchitecture)
 OptimizeForArchitecture()
 ## Packages
 find_package (Perftools REQUIRED)
+find_package (Readline REQUIRED)
 
 # Documentation - make doc
 add_subdirectory(docs)
@@ -30,6 +31,7 @@ INCLUDE(CPack)
 ## Includes and libraries
 include_directories ("include")
 include_directories (${GOOGLE_PERFTOOLS_INCLUDE_DIR})
+include_directories (${READLINE_INCLUDE_DIR})
 add_library (board src/lib/board.cpp)
 add_library (move src/lib/move.cpp)
 add_library (basicplayer src/lib/basicplayer.cpp)
@@ -48,5 +50,5 @@ target_link_libraries (gone_game ${Perftools_TCMALLOC_LIBRARY} ${Perftools_PROFI
 add_executable (gone_sgf_test src/bin/sgf_test.cpp)
 target_link_libraries (gone_sgf_test ${Perftools_TCMALLOC_LIBRARY} ${Perftools_PROFILER_LIBRARY} sgf game board basicplayer move)
 
-add_executable (gone_gtp src/bin/gtp.cpp)
-target_link_libraries (gone_gtp ${Perftools_TCMALLOC_LIBRARY} ${Perftools_PROFILER_LIBRARY} sgf game board basicplayer move)
+add_executable (gone src/bin/gtp.cpp)
+target_link_libraries (gone ${Perftools_TCMALLOC_LIBRARY} ${READLINE_LIBRARY} ${Perftools_PROFILER_LIBRARY} sgf game board basicplayer move)

@@ -13,7 +13,8 @@ other engines via GTP and an arbitrator such as GoGUI.
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
-#include <algorithm>
+#include <stdlib.h>
+#include <readline/readline.h>
 using namespace gone;
 /**
 Outputs a GTP 'successful' response with the given response string and ID.
@@ -43,37 +44,70 @@ void failureResponse(const char* output, int id) {
     std::cout << "? "<< output << "\n\n";
   }
 }
-int getVertex(const char in) {
+int getVertex(const char* in) {
   char vertexes[9] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
+  int x = 0;
+  int y = 0;
+  char * vtx;
+  strcpy(vtx, in);
+  char c;
+  int i=0;
+  while (vtx[i])
+  {
+    vtx[i] = tolower(vtx[i]);
+    i++;
+  }
   for (int i;i<9;i++) {
-    if (vertexes[i] == in) {
-      return i;
+    if (vertexes[i] == vtx[0]) {
+      x = i;
     }
   }
-  return 0;
+  y = atoi(vtx);
+  return (x*y);
+}
+bool getColour(const char* in) {
+  if (strcmp(in, "w") == 0 || strcmp(in, "white") == 0) {
+    return true;
+  }
+  return false;
 }
 int main() {
   game *g = new game;
   bool running = true;
   
   while(running) {
+    // Set our variables up.
     int id = 9999;
-    char command[256];
-    char arguments[256];
-    int found = 0;
-    // Scan stdin for input- either a ID+command combo, or just a command alone
-    found = scanf(" %d %s", &id, command);
-    if (found == 0) {
-      found = scanf(" %s", command);
+    char * command;
+    char * arguments;
+    // We're going to use readline to pull in the data we want from the cmdline.
+    char *line = readline ("");
+    // Now tokenize.
+    char *pch = strtok(line, " ");
+    // If the first token is an integer, that's our ID.
+    if (atoi(pch) != 0) {
+      id = atoi(pch);
+      // Next, command
+      pch = strtok (NULL, " ");
+      command = pch;
+    } else {
+      // If it's not an integer, that's our command.
+      command = pch;
     }
-    std::cout << "I got command " << command << " with id " << id << " and found " << found << endl;
-    // Now we have our command - let's pick up the arguments.
-    char arg[64];
-    while(scanf(" %s ", arg) == 1) {
-      strcat(arguments, arg);
-      std::cout << "I got argument: " << arg << endl; 
+    pch = strtok (NULL, " ");
+    arguments = new char[256];
+    // The rest are arguments.
+    while (pch != NULL)
+    {
+      strcat(arguments, pch);
+      pch = strtok (NULL, " ");
+      // Append a space if we've got another thing after this. Otherwise, no spaces.
+      if (pch != NULL) {
+        strcat(arguments, " ");
+      }
     }
-    std::cout << "I got arguments: " << arguments << " and found " << found << endl;
+    // Debug output ahoy.
+    std::cout << "I got command " << command << " with id " << id << " and arguments " << arguments << endl;
     if (strcmp(command,"protocol_version") == 0) {
       successResponse("2", id);
     } else if (strcmp(command,"name") == 0) {
@@ -89,7 +123,11 @@ int main() {
       running = false;
       successResponse("", id); // We have to send a command prior to quitting
     } else if (strcmp(command,"boardsize") == 0) {
-      // FIXME: Need to be able to handle arguments!
+      if (atoi(arguments) != 9) {
+        failureResponse("unacceptable size", id);
+      } else {
+        successResponse("", id);
+      }
     } else if (strcmp(command,"clear_board") == 0) {
       delete g;
       g = new game;
@@ -98,7 +136,7 @@ int main() {
       // TODO: Should probably actually do something with komi
       successResponse("", id); // We have to send a command prior to quitting
     } else if (strcmp(command,"play") == 0) {
-
+      
     } else if (strcmp(command,"genmove") == 0) {
     } else {
       failureResponse("unknown command", id);
